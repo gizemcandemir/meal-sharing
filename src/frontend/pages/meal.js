@@ -1,5 +1,7 @@
+import { fetchMealById } from "../helpers/helper";
+
 function mealsId(req, router) {
-  console.log(req.param.id);
+  fetchMealById(req);
 }
 
 export default mealsId;

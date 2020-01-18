@@ -22,6 +22,7 @@ router.use("/reservations", reservationsRouter);
 router.use("/reviews", reviewsRouter);
 app.use("/api", router);
 
+
 app.listen(port, () => {
   console.log(`Server listening on port ${port}...`);
 });
