@@ -1,9 +1,8 @@
-import { fetchMeals, renderHeader, renderFooter } from "../helpers/helper";
+import { fetchMeals, renderHeader } from "../helpers/helper";
 
 function homeRouter(req, router) {
   renderHeader();
-	fetchMeals();
-  renderFooter();
+  fetchMeals();  
 }
 
 export default homeRouter;

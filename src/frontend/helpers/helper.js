@@ -2,30 +2,12 @@ function renderHeader() {
 	const header = document.createElement("div");
 	header.className = "header";
 	header.innerHTML = `
-		<div>
+		<div class="header">
 			<h1>Meal Sharing</h1>
-			<img src="../../public/img/header.jpg" alt="Healthy Food">
+			<img src="../../public/img/stefan-vladimirov-Q_Moi2xjieU-unsplash.jpg" alt="Healthy Food">
 		</div>
 	`;
 	document.body.appendChild(header);
-}
-
-function renderMeals(meals) {
-	const mealList = document.createElement("ul");
-	meals.forEach(meal => {
-		const mealItem = document.createElement("li");
-		mealItem.innerHTML = `
-		<div>
-  <img src="https://picsum.photos/200/150" alt="Menu">
-  <h3>${meal.title}</h3>
-  <p>Meal Description</p>
-</div>
-		
-		`;
-		mealItem.classList.add = "meal";
-		mealList.appendChild(mealItem);
-	});
-	document.body.appendChild(mealList);
 }
 
 function fetchMeals() {
@@ -33,7 +15,25 @@ function fetchMeals() {
 		.then(res => res.json())
 		.then(meals => {
 			renderMeals(meals);
+			renderFooter();
 		});
+}
+
+function renderMeals(meals) {
+	const mealList = document.createElement("ul");
+	mealList.classList.add("meal");
+	meals.forEach(meal => {
+		const mealItem = document.createElement("li");
+		mealItem.classList.add("meal");
+		mealItem.innerHTML = `
+			<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu">
+			<h3>${meal.title}</h3>
+			<p>${meal.description}, </br> only for ${meal.price} kr.</p>		
+		`;
+		mealItem.classList.add = "meal";
+		mealList.appendChild(mealItem);
+	});
+	document.body.appendChild(mealList);
 }
 
 function fetchMealById(req) {
