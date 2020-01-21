@@ -1,7 +1,7 @@
 import { fetchMealById } from "../helpers/helper";
 
-function mealsId(req, router) {
+function mealRouter(req, router) {
   fetchMealById(req);
 }
 
-export default mealsId;
+export default mealRouter;

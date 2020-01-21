@@ -22,13 +22,17 @@ function fetchMeals() {
 function renderMeals(meals) {
 	const mealList = document.createElement("ul");
 	mealList.classList.add("meal");
+
 	meals.forEach(meal => {
 		const mealItem = document.createElement("li");
 		mealItem.classList.add("meal");
+
 		mealItem.innerHTML = `
-			<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu">
-			<h3>${meal.title}</h3>
-			<p>${meal.description}, </br> only for ${meal.price} kr.</p>		
+			<div class="meal-item" onclick="fetchMealById(${meal.id})">
+				<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu">
+					<h3>${meal.title}</h3>
+					<p>${meal.description}, </br> only for ${meal.price} kr.</p>	
+			</div>
 		`;
 		mealItem.classList.add = "meal";
 		mealList.appendChild(mealItem);
