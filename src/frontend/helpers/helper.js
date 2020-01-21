@@ -10,6 +10,17 @@ function renderHeader() {
 	document.body.appendChild(header);
 }
 
+function fetchMealById(req) {
+	const id = req.param.id;
+	fetch(`/api/meals/${req.param.id}`)
+		.then(res => res.json())
+		.then(meal => {
+			const mealP = document.createElement("p");
+			mealP.innerText = meal[0].title;
+			mealP.classList.add = "meal";
+			document.body.appendChild(mealP);
+		});
+}
 function fetchMeals() {
 	fetch("/api/meals")
 		.then(res => res.json())
@@ -28,11 +39,12 @@ function renderMeals(meals) {
 		mealItem.classList.add("meal");
 
 		mealItem.innerHTML = `
-			<div class="meal-item" onclick="fetchMealById(${meal.id})">
-				<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu">
-					<h3>${meal.title}</h3>
-					<p>${meal.description}, </br> only for ${meal.price} kr.</p>	
-			</div>
+			
+		<a href="/meals/${meal.id}">
+		<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu"></a>
+		<h3>${meal.title}</h3>
+		<p>${meal.description}, </br> only for ${meal.price} kr.</p>
+			
 		`;
 		mealItem.classList.add = "meal";
 		mealList.appendChild(mealItem);
@@ -40,17 +52,8 @@ function renderMeals(meals) {
 	document.body.appendChild(mealList);
 }
 
-function fetchMealById(req) {
-	const id = req.param.id;
-	fetch(`/api/meals/${id}`)
-		.then(res => res.json())
-		.then(meal => {
-			const mealP = document.createElement("p");
-			mealP.innerText = meal[0].title;
-			mealP.classList.add = "meal";
-			document.body.appendChild(mealP);
-		});
-}
+// ${meal[0].id}
+
 
 function renderFooter() {
 	const footer = document.createElement("footer");
