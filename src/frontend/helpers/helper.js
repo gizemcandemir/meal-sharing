@@ -42,6 +42,8 @@ function fetchMealById(req) {
 }
 
 function renderSingleMeal(meal) {
+	const hr = document.createElement("hr");
+	document.body.appendChild(hr);
 	const card = document.createElement("div");
 	card.classList.add("single-meal");
 	card.classList.add("card");
@@ -51,8 +53,30 @@ function renderSingleMeal(meal) {
 		</div>
 		<div class="card-description">
 			<h3>${meal[0].title}</h3>
-			<p>${meal[0].description}.</br>Price: ${meal[0].price} kr.</p>
+			<p>${meal[0].description}</p>
+			<ul>
+				<li>Price: ${meal[0].price} kr.</li>
+				<li>Location: ${meal[0].location}</li>
+				<li>Max. Guests: ${meal[0].max_guests}</li>
+			</ul>
 		</div>
+		<form method="post" class="reservation-form">
+			<div class="reservation-form">
+				<label for="numberOfGuests">Number of guests: </label>
+				<input type="number" name="number-of-guests" id="number-of-guests" required>
+			</div>
+			<div class="reservation-form">
+				<label for="date">Date: </label>
+				<input type="date" name="name" id="name" required>
+			</div>
+			<div class="reservation-form">
+				<label for="email">Enter your email: </label>
+				<input type="email" name="email" id="email" required>
+			</div>
+			<div class="reservation-form">
+				<input type="submit" value="Request reservation">
+			</div>
+		</form>
 		`;
 	document.body.appendChild(card);
 }
@@ -76,7 +100,12 @@ function renderMeals(meals) {
 		<a href="/meals/${meal.id}">
 		<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu"></a>
 		<h3>${meal.title}</h3>
-		<p>${meal.description}, </br> only for ${meal.price} kr.</p>
+		<p>${meal.description}</p>
+		<ul>
+			<li>Price: ${meal.price} kr.</li>
+			<li>Location: ${meal.location}</li>
+			<li>Max. Guests: ${meal.max_guests}</li>
+		</ul>
 		`;
 		mealItem.classList.add = "meal";
 		mealList.appendChild(mealItem);
