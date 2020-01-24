@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
 // POST
 router.post("/", (req, res) => {
 	const newReservation = req.body;
-
 	pool.query("INSERT INTO reservations SET ?", newReservation, (error, results, fields) => {
 		if (error) {
 			return res.send(error);

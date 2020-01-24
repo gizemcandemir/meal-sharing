@@ -14,5 +14,6 @@ const router = new SPARouter(options);
 router.get("/", homeRouter);
 router.get("/meals/{id}", mealRouter);
 router.get("/meals", allMealsRouter);
+// router.get("/reservations", reservationsRouter);
 
 router.init();

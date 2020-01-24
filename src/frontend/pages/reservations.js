@@ -1,14 +1,15 @@
 import { renderNavbar, renderFooter } from "../helpers/helper";
 
 function requestReservation(data) {
-	fetch("api/reservations", {
+	fetch("/api/reservations/", {
 		method: "POST",
 		headers: {
-      "Content-Type": "application/json"
-    },
+			Accept: "application/json, text/plain, */*",
+			"Content-Type": "application/json"
+		},
 		body: JSON.stringify(data)
 	}).then(res => {
-		if (res.status != 200) {
+		if (res.status != 201) {
 			alert("Something went wrong, please try again");
 		} else {
 			alert("Your reservation has been submitted!");
@@ -23,13 +24,15 @@ function fetchMealById(req) {
 		.then(meal => {
 			renderSingleMeal(meal);
 			renderFooter();
-      document.querySelector("form").addEventListener("submit", function(event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const mealId = req.param.id;
-        const data = { name, email, mealId };
-        requestReservation(data);
+
+			const name = document.getElementById("name").value;
+			const phone = document.getElementById("phone").value;
+			const email = document.getElementById("email").value;
+			const mealId = req.param.id;
+			const data = { name, phone, email, mealId };
+
+			document.querySelector("form").addEventListener("submit", function() {
+				requestReservation(data);
 			});
 		}, false);
 }
@@ -53,17 +56,21 @@ function renderSingleMeal(meal) {
 				<li>Max. Guests: ${meal[0].max_guests}</li>
 			</ul>
 		</div>
-    <form method="post" class="reservation-form">
+    <form method="post" class="reservation-form" action="api/reservations">
       <div class="reservation-form">
 				<label for="name">Enter your name </label>
-				<input type="name" name="name" id="name" required>
+				<input type="name" name="name" id="name" value="Gizem Candemir" required>
+      </div>
+      <div class="reservation-form">
+	      <label for="number">Enter your phone: </label>
+	      <input type="phone" name="phone" id="phone" value="53906106" required>
       </div>
 			<div class="reservation-form">
 				<label for="email">Enter your email: </label>
-				<input type="email" name="email" id="email" required>
+				<input type="email" name="email" id="email" value="gizemc@gmail.com" required>
 			</div>
 			<div class="reservation-form">
-				<input type="submit" class="submit" value="Request reservation">
+				<input type="submit" value="Request reservation">
 			</div>
 		</form>
 		`;
@@ -82,4 +89,4 @@ function mealRouter(req, router) {
 	fetchMealById(req);
 }
 
-export { mealRouter as default, requestReservation };
+export default reservationsRouter;
