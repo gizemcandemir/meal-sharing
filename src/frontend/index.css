@@ -5,9 +5,70 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+nav.navbar {
+  background-color: #666666;
+  height: 4em;
+  display: flex;
+}
+
+nav a {
+  color:white;
+  line-height: 4em;
+  justify-content: space-around;
+  padding: 0 2em;
+  text-decoration: none;
+}
+
+nav a:active {
+  background: grey;
+}
+
 div.header {
   height: 300px;
   position: relative;
+}
+
+div.section {
+  height: 5em;
+  position: relative;
+  background-color: #D293B2;
+}
+
+div.section p {
+  line-height: 5em;
+  text-align: center;
+}
+
+div.section.single-meal {
+  height: 5em;
+  text-align: center;
+}
+
+div.section.single-meal p {
+  line-height: 5em;
+  text-align: center;
+}
+
+div.single-meal.card {
+  background-color: #333;
+  color: beige;
+  padding: 2em;
+  margin: 2em 1em;
+  display: flex;
+}
+
+div.card-description { 
+  margin-left: 2em;
+}
+
+div.single-meal.card h3 {
+  padding-bottom: 1em;
+  text-justify: left;
+}
+
+div.single-meal p {
+  line-height: 1.4em;
+  text-align: left;
 }
 
 .header img {
@@ -39,7 +100,7 @@ ul.meal {
 }
 
 li.meal {
-  flex-basis: 3rem;
+  flex-basis: 3em;
   align-content: flex-start;
   background-color: #333;
   color: beige;
@@ -50,10 +111,12 @@ li.meal {
 
 li.meal h3 {
   padding: 1rem 0;
+  text-align: center;
 }
 
 li.meal p {
   line-height: 1.4em;
+  text-align: center;
 }
 
 img {
