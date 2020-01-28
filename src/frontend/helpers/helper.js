@@ -31,32 +31,31 @@ function renderNavbar() {
 	document.body.appendChild(navbar);
 }
 
-
 function renderMeals(meals) {
 	const mealList = document.createElement("ul");
 	mealList.classList.add("meal");
 	meals.forEach(meal => {
 		const mealItem = document.createElement("li");
+		mealItem.setAttribute("data-id", meal.id);
 		mealItem.classList.add("meal");
 		mealItem.innerHTML = `
-		<a href="/meals/${meal.id}">
-		<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu"></a>
-		<h3>${meal.title}</h3>
-		<p>${meal.description}</p>
-		<ul>
-			<li>Price: ${meal.price} kr.</li>
-			<li>Location: ${meal.location}</li>
-			<li>Max. Guests: ${meal.max_guests}</li>
-		</ul>
+			<img src="../../public/img/anna-pelzer-IGfIGP5ONV0-unsplash.jpg" alt="Menu" />
+			<h3>${meal.title}</h3>
+			<p>${meal.description}</p>
+			<ul>
+				<li>Price: ${meal.price} kr.</li>
+				<li>Location: ${meal.location}</li>
+				<li>Max. Guests: ${meal.max_guests}</li>
+			</ul>
 		`;
-		mealItem.classList.add = "meal";
+		mealItem.addEventListener("click", makeClickable);
 		mealList.appendChild(mealItem);
 		document.body.appendChild(mealList);
 	});
 }
 
 function fetchMeals() {
-  fetch("/api/meals")
+	fetch("/api/meals")
 		.then(res => res.json())
 		.then(meals => {
 			renderMeals(meals);
@@ -64,17 +63,15 @@ function fetchMeals() {
 		});
 }
 
-function makeClickable() {
-	document.querySelector(".meal").addEventListener("click", () => {
-		fetch(`/api/meals/${mealId}`)
-			.then(res => res.json())
-			.then(meal => {
-				const mealP = document.createElement("p");
-				mealP.innerText = meal[0].title;
-				mealP.classList.add = "meal";
-				document.body.appendChild(mealP);
-			});
-	});
+function makeClickable(e) {
+	if (e.target.parentNode.dataset.id) {
+		const mealId = e.target.parentNode.dataset.id;
+		location.href = `/meals/${mealId}`;
+	} else {
+		console.log(e.target.dataset.id);
+		const mealId = e.target.dataset.id;
+		location.href = `/meals/${mealId}`;
+	}
 }
 
 function renderFooter() {
